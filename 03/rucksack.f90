@@ -5,10 +5,10 @@ function array_from_file(name, mode)
 
     character(len=*), intent(in) :: name
     character(len=*), intent(in) :: mode
-    character(len=32), allocatable :: arr(:), tmp(:)
-    character(len=32), allocatable :: array_from_file(:)
+    character(len=64), allocatable :: arr(:), tmp(:)
+    character(len=64), allocatable :: array_from_file(:)
 
-    character(len=32) :: line
+    character(len=64) :: line
     integer :: i, ios, array_len
 
     array_len = 9000
@@ -59,17 +59,17 @@ end module utils
 program rucksack_cleanup
     use utils
     implicit none
-    character(len=32), allocatable :: arr(:)
-    character(len=17), allocatable :: rucksack(:)
+    character(len=64), allocatable :: arr(:)
+    character(len=32), allocatable :: rucksack(:)
     character(len=1), allocatable :: priority_arr(:)
-    character(len=1), dimension(52) :: alphabet=(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'i', 'h', 'j','k', 'l', 'm', &
-                                                  'm', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', &
-                                                  'A', 'B', 'C', 'D', 'E', 'F', 'G', 'I', 'H', 'J', 'K', 'L', 'M', &
-                                                  'M', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'])
-    character(len=16) :: item1, item2
+    character(len=1), dimension(52) :: alphabet=(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',&
+                                                  'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',&
+                                                  'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',&
+                                                  'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'])
+    character(len=32) :: item1, item2
     integer :: i, j, k, l, len, result, items_len, item_len
 
-    arr = array_from_file('input-test', '(A)')
+    arr = array_from_file('input', '(A)')
     len = size(arr) - 1
 
     allocate(rucksack(len*2))
