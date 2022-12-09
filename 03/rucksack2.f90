@@ -65,10 +65,10 @@ program rucksack_cleanup
                                                   'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',&
                                                   'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'])
     character(len=1) :: badge
-    character(len=32) :: item1, item2, item3
+    character(len=64) :: item1, item2, item3
     integer :: i, j, k, l, m, len, result, item1_len, item2_len, item3_len
 
-    arr = array_from_file('input-test', '(A)')
+    arr = array_from_file('input', '(A)')
     len = size(arr) - 1
 
     result = 0
@@ -76,6 +76,7 @@ program rucksack_cleanup
     i_loop: do i = 1, len
         if (modulo(i,3) /= 0) cycle
             continue
+        badge = ''
         item1 = arr(i-2)
         item1_len = len_trim(item1)
         item2 = arr(i-1)
@@ -91,10 +92,10 @@ program rucksack_cleanup
                             exit j_loop
                         endif
                     end do l_loop
-                    exit j_loop
                 endif
             end do k_loop
         end do j_loop
+
         m_loop: do m = 1, 52
             if (badge == alphabet(m)) then
                 result = result + m
