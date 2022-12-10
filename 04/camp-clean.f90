@@ -60,18 +60,20 @@ program camp_clean
     use utils
     implicit none
     character(len=4), allocatable :: arr(:)
-    integer :: i, j, result, len, sec11, sec12, sec21, sec22, longest_start, longest_end, shortes_start, shortes_end
+    integer :: i, j, result, len
+    integer :: sec11, sec12, sec21, sec22, longest_start, longest_end, shortes_start, shortes_end
     logical :: start, end
 
     arr = array_from_file('input-test', '(A)')
     len = size(arr) - 1
     result = 0
 
-    i_loop: do i = i, len
-        read(arr(i)(1:1),'(I1)') sec11
-        read(arr(i)(2:2),'(I1)') sec12
-        read(arr(i)(3:3),'(I1)') sec21
-        read(arr(i)(4:4),'(I1)') sec22
+    i_loop: do i = 1, len
+        read(arr(i)(1:1),*) sec11
+        read(arr(i)(2:2),*) sec12
+        read(arr(i)(3:3),*) sec21
+        read(arr(i)(4:4),*) sec22
+        !print *, arr(i), i, sec11, arr(i)(1:1), sec12, arr(i)(2:2), sec21, arr(i)(3:4), sec22, arr(i)(4:4)
 
         longest_start = 0
         longest_end = 0
@@ -100,12 +102,9 @@ program camp_clean
         end do j_loop
         if (start .and. end) then
             result = result+1
-            !print *, arr(i), i, sec11, arr(i)(1:1), sec12, arr(i)(2:2), sec21, arr(i)(3:4), sec22, arr(i)(4:4)
         endif
-        print *, i
     end do i_loop
-    
-    print *, 'test'
+
     print *, result
 
 stop
