@@ -90,8 +90,8 @@ program camp_clean
     implicit none
     character(len=11), allocatable :: arr(:)
     integer, dimension(:, :), allocatable :: sectors
-    integer :: i, j, k, result, len
-    integer :: sec11, sec12, sec21, sec22, longest_start, longest_end, shortes_start, shortes_end
+    integer :: i, j, k, result1, result2, len
+    integer :: longest_start, longest_end, shortes_start, shortes_end
     logical :: start, end
 
     arr = array_from_file('input', '(A)')
@@ -99,7 +99,8 @@ program camp_clean
 
     sectors = sectors_from_array(arr)
 
-    result = 0
+    result1 = 0
+    result2 = 0
 
     i_loop: do i = 1, size(sectors)/4
         longest_start = 0
@@ -128,11 +129,15 @@ program camp_clean
             endif
         end do j_loop
         if (start .and. end) then
-            result = result+1
+            result1 = result1+1
+        endif
+        if (start .or. end) then
+            result2 = result2+1
         endif
     end do i_loop
 
-    print *, result
+    print *, 'Exercise 1', result1
+    print *, 'Exercise 2', result2
 
 stop
 end program camp_clean
